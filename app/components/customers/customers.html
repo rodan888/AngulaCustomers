@@ -1,0 +1,45 @@
+<div class="row ">
+  <div class="col-md-12 clrp">        
+  	<h1 class="mt2 mb2">Customers - {{customersList.length}}</h1>	        	
+  	<div class="container-fluid">
+  		<div class="row">
+
+  			<div data-ng-repeat="customer in customersList" class="col-md-12 customer">					
+					<div class="container-fluid">
+						<row>
+							<div class="col-md-3 clrp">
+								<h4 class="title">{{customer.name}}</h4>
+							</div>
+							<div class="col-md-4 clrp">								
+								<span><i class="fa fa-phone"></i> {{customer.phone}}</span>
+								<span><i class="fa fa-map-marker"></i> {{customer.address}}</span>
+							</div>
+							<div class="col-md-4 clrp">
+								<span><i class="fa fa-calendar-plus-o"></i> {{customer.createdAt | dateFormat | date: "medium"}}</span>
+								<span><i class="fa fa-calendar-check-o"></i> {{customer.updatedAt | dateFormat | date: "medium"}}</span>
+							</div>
+							<div class="col-md-1 clrp">								
+								<button data-ng-click="edit=!edit" class="btn">
+									<i class="fa fa-pencil"></i>
+								</button>	
+								<button data-ng-click="removeCustomers($index)" class="btn">
+									<i class="fa fa-times"></i>
+								</button>		
+							</div>
+							<div class="col-md-12 edit-block" data-ng-show="edit">
+								<input type="text" data-ng-model="customer.name" data-ng-blur="editCustomers($index,customer);edit=!edit">
+							</div>
+						</row>
+					</div>														
+  			</div>
+
+  			<div class="col-md-12 mt3 center">
+  				<hr>
+						<a href="#/products" class="btn mt3 mb3">Products</a>
+  				<hr>
+  			</div>
+
+  		</div>
+  	</div>	    	
+  </div>
+</div>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+  <html lang="en" ng-app='MyApp'>
+    <head>
+      <meta charset="UTF-8">
+      <title>Angular start</title>
+      <link rel="shortcut icon" href="app/assets/img/favicon.png">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+      <script src="assets/libs/angular/angular.min.js"></script>
+      <script src="assets/libs/angular-route/angular-route.min.js"></script>
+      <script src="assets/libs/angular-resource/angular-resource.min.js"></script>
+      <script src="assets/libs/angular-animate/ng-animate.min.js"></script>
+      <script src="assets/libs/ng-map/ng-map.min.js"></script>
+
+      <!-- Over script library -->
+      <script src="assets/libs/moment/moment.min.js"></script>
+      <script src="assets/libs/underscore/underscore.min.js"></script>
+      <script src="assets/libs/jQuery/jquery-2.2.0.min.js"></script>
+
+      <!-- Main application js -->
+      <script src="app.js"></script>  
+
+      <!-- Temporary paths to controllers -->      
+      <script src="components/customers/customersCtrl.js"></script> 
+
+      <!-- Over components -->
+      <script src="components/directives/directive.js"></script>
+      <script src="components/services/dataService.js"></script>
+      <script src="components/filters/filters.js"></script>
+
+      <!-- Styles -->
+      <link rel="stylesheet" href="assets/css/vendor.min.css">
+      <link rel="stylesheet" href="assets/css/main.min.css">
+  </head>  
+  <body data-ng-cloak>
+    <header>
+      <div class="container">
+        <div class="row">
+          <navigation></navigation>
+        </div>
+      </div>
+    </header> 
+
+    <div class="container anim-wrap" 
+      data-ng-class="animation"
+      data-ng-controller="animateCtrl"
+      data-body-height>
+      <div class="view" data-ng-view></div>
+    </div>
+  </body>   
+</html>
