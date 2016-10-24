@@ -9,20 +9,18 @@
 
       <script src="assets/libs/angular/angular.min.js"></script>
       <script src="assets/libs/angular-route/angular-route.min.js"></script>
-      <script src="assets/libs/angular-resource/angular-resource.min.js"></script>
-      <script src="assets/libs/angular-animate/ng-animate.min.js"></script>
-      <script src="assets/libs/ng-map/ng-map.min.js"></script>
+      <script src="assets/libs/angular-resource/angular-resource.min.js"></script>      
 
       <!-- Over script library -->
-      <script src="assets/libs/moment/moment.min.js"></script>
-      <script src="assets/libs/underscore/underscore.min.js"></script>
       <script src="assets/libs/jQuery/jquery-2.2.0.min.js"></script>
 
       <!-- Main application js -->
       <script src="app.js"></script>  
 
       <!-- Temporary paths to controllers -->      
-      <script src="components/customers/customersCtrl.js"></script> 
+      <script src="components/customers/customersCtrl.js"></script>
+      <script src="components/products/productsCtrl.js"></script>
+      <script src="components/invoices/invoicesCtrl.js"></script>
 
       <!-- Over components -->
       <script src="components/directives/directive.js"></script>
@@ -42,10 +40,7 @@
       </div>
     </header> 
 
-    <div class="container anim-wrap" 
-      data-ng-class="animation"
-      data-ng-controller="animateCtrl"
-      data-body-height>
+    <div class="container anim-wrap" data-body-height>
       <div class="view" data-ng-view></div>
     </div>
   </body>   

@@ -1,0 +1,64 @@
+<div class="row ">
+	<div class="col-md-12">        
+		<h1 class="mt2 mb2">Products - {{productsList.length}}</h1>	
+
+				<div data-ng-repeat="product in productsList" class="col-md-12 product">
+					<div class="container-fluid">
+						<div class='row'>
+							<div class="col-md-3 clrp">
+								<h4 class="title">{{product.name}}</h4>
+							</div>
+							<div class="col-md-4 clrp">								
+								<span class="mt1">${{product.price}}</span>							
+							</div>
+							<div class="col-md-4 clrp">
+								<span><i class="fa fa-calendar-plus-o"></i> {{product.createdAt | dateFormat | date: "medium"}}</span>
+								<span><i class="fa fa-calendar-check-o"></i> {{product.updatedAt | dateFormat | date: "medium"}}</span>
+							</div>
+							<div class="col-md-1 clrp">								
+								<button data-ng-click="edit=!edit" class="btn">
+									<i class="fa fa-pencil"></i>
+								</button>	
+								<button data-ng-click="removeProduct($index)" class="btn">
+									<i class="fa fa-times"></i>
+								</button>		
+							</div>
+							<div class="col-md-12 edit-block" data-ng-show="edit">
+								<input type="text" data-ng-model="product.name" data-ng-blur="editCustomers($index,product);edit=!edit">
+							</div>
+						</div>
+					</div>	
+				</div>
+
+				<div class="col-md-12 mt3 center">
+					<hr>
+					<button type="button" class="btn mt3 mb3" data-ng-click="addNew=!addNew">Add product</button>
+					<hr>
+				</div>
+			
+				<div class="popup" data-ng-class="{'active': addNew}">
+					<div class="popup-content">
+						<form data-ng-submit="addProduct(product)" class="mt2 mb2">
+							<h4 class="mb2">New product</h4>
+							<div class="form-group">
+								<input type="text" id="customer-name" data-ng-model="product.name"/>
+								<label for="customer-name">Name</label>
+							</div>				  
+
+							<div class="form-group">
+								<input type="text" id="customer-price" data-ng-model="product.price"/>
+								<label for="customer-price">Price</label>
+							</div>							
+
+							<div class="button-wrap center">
+								<button type="submit" class="btn" data-ng-click="addNew=!addNew">Save product</button>				
+							</div>
+						</form>
+						<button data-ng-click="addNew=!addNew" class="fade-out">
+							<i class="fa fa-times"></i>
+						</button>					
+					</div>
+				</div>
+
+	</div>
+</div>

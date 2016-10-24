@@ -1,0 +1,79 @@
+<div class="row ">
+	<div class="col-md-12">        
+		<h1 class="mt2 mb2">Invoices - {{invoices.customerList.length}}</h1>	        	
+		{{invoices.test}}
+
+		<form data-ng-submit="addCustomer(customer)" class="mt2 mb2">
+		<h4 class="mb2">New invoice</h4>
+
+			<div class="form-group select">
+				<select 
+					data-ng-model="customer" 					
+					data-ng-options="customer.name for customer in invoices.customerList">
+					 <option value="">Select customer</option>
+				</select>
+				<label for="customer-name"><i class="fa fa-angle-up"></i></label>
+			</div>	
+
+			<div class="form-group select">
+				<select ng-model="product" ng-options="product.name for product in invoices.productsList">
+					 <option value="">Add product</option>
+				</select>
+				<label for="customer-name"><i class="fa fa-angle-up"></i></label>
+			</div>				  
+			<!-- <div class="form-group">
+				<input type="text" id="customer-name" data-ng-model="customer.name"/>
+				<label for="customer-name">Name</label>
+			</div>				  
+
+			<div class="form-group">
+				<input type="text" id="customer-phone" data-ng-model="customer.phone"/>
+				<label for="customer-phone">Phone</label>
+			</div>
+
+			<div class="form-group">
+				<input type="text" id="customer-address" data-ng-model="customer.address"/>
+				<label for="customer-address">Address</label>
+			</div>			 -->	  
+
+			<div class="button-wrap center">
+				<button type="submit" class="btn" data-ng-click="addNew=!addNew">Save customer</button>				
+			</div>
+		</form>
+
+<!-- 		<h3>{{customer.name}}</h3>
+		<span>{{product.name}}</span>  -->
+	
+	 <!-- data-ng-repeat="invoice in invoicesList" -->
+	 {{invoices.invoicesList}}
+		<div class="col-md-12 invoice">
+					<div class="container-fluid">
+						<div class='row'>
+							<div class="col-md-3 clrp">
+								<h4 class="title">{{customer.name}}</h4>
+							</div>
+							<div class="col-md-4 clrp">
+								<span>{{product.name}}</span>								
+								<span class="mt1">${{product.price * product.count}}</span>
+								<input type="number" data-ng-model="product.count" value="1" min="1"> 
+							</div>
+							<div class="col-md-4 clrp">
+								<!-- <span><i class="fa fa-calendar-plus-o"></i> {{product.createdAt | dateFormat | date: "medium"}}</span>
+								<span><i class="fa fa-calendar-check-o"></i> {{product.updatedAt | dateFormat | date: "medium"}}</span> -->
+							</div>
+							<div class="col-md-1 clrp">								
+								<button data-ng-click="edit=!edit" class="btn">
+									<i class="fa fa-pencil"></i>
+								</button>	
+								<button data-ng-click="removeProduct($index)" class="btn">
+									<i class="fa fa-times"></i>
+								</button>		
+							</div>
+							<div class="col-md-12 edit-block" data-ng-show="edit">
+								<input type="text" data-ng-model="product.name" data-ng-blur="editCustomers($index,product);edit=!edit">
+							</div>
+						</div>
+					</div>	
+				</div>
+	</div>
+</div>

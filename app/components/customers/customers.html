@@ -1,45 +1,71 @@
 <div class="row ">
-  <div class="col-md-12 clrp">        
-  	<h1 class="mt2 mb2">Customers - {{customersList.length}}</h1>	        	
-  	<div class="container-fluid">
-  		<div class="row">
+	<div class="col-md-12">        
+		<h1 class="mt2 mb2">Customers - {{customersList.length}}</h1>	        	
+		{{testData}}
 
-  			<div data-ng-repeat="customer in customersList" class="col-md-12 customer">					
-					<div class="container-fluid">
-						<row>
-							<div class="col-md-3 clrp">
-								<h4 class="title">{{customer.name}}</h4>
-							</div>
-							<div class="col-md-4 clrp">								
-								<span><i class="fa fa-phone"></i> {{customer.phone}}</span>
-								<span><i class="fa fa-map-marker"></i> {{customer.address}}</span>
-							</div>
-							<div class="col-md-4 clrp">
-								<span><i class="fa fa-calendar-plus-o"></i> {{customer.createdAt | dateFormat | date: "medium"}}</span>
-								<span><i class="fa fa-calendar-check-o"></i> {{customer.updatedAt | dateFormat | date: "medium"}}</span>
-							</div>
-							<div class="col-md-1 clrp">								
-								<button data-ng-click="edit=!edit" class="btn">
-									<i class="fa fa-pencil"></i>
-								</button>	
-								<button data-ng-click="removeCustomers($index)" class="btn">
-									<i class="fa fa-times"></i>
-								</button>		
-							</div>
-							<div class="col-md-12 edit-block" data-ng-show="edit">
-								<input type="text" data-ng-model="customer.name" data-ng-blur="editCustomers($index,customer);edit=!edit">
-							</div>
-						</row>
-					</div>														
-  			</div>
+		<div data-ng-repeat="customer in customersList" class="col-md-12 customer">					
+			<div class="container-fluid">
+				<div class='row'>
+					<div class="col-md-3 clrp">
+						<h4 class="title">{{customer.name}}</h4>
+					</div>
+					<div class="col-md-4 clrp">								
+						<span><i class="fa fa-phone"></i> {{customer.phone}}</span>
+						<span><i class="fa fa-map-marker"></i> {{customer.address}}</span>
+					</div>
+					<div class="col-md-4 clrp">
+						<span><i class="fa fa-calendar-plus-o"></i> {{customer.createdAt | dateFormat | date: "medium"}}</span>
+						<span><i class="fa fa-calendar-check-o"></i> {{customer.updatedAt | dateFormat | date: "medium"}}</span>
+					</div>
+					<div class="col-md-1 clrp">								
+						<button data-ng-click="edit=!edit" class="btn">
+							<i class="fa fa-pencil"></i>
+						</button>	
+						<button data-ng-click="removeCustomers($index)" class="btn">
+							<i class="fa fa-times"></i>
+						</button>		
+					</div>
+					<div class="col-md-12 edit-block" data-ng-show="edit">
+						<input type="text" data-ng-model="customer.name" data-ng-blur="editCustomers($index,customer);edit=!edit">
+					</div>
+				</div>
+			</div>														
+		</div>
 
-  			<div class="col-md-12 mt3 center">
-  				<hr>
-						<a href="#/products" class="btn mt3 mb3">Products</a>
-  				<hr>
-  			</div>
+		<div class="col-md-12 mt3 center">
+			<hr>
+			<button type="button" class="btn mt3 mb3" data-ng-click="addNew=!addNew">Add customer</button>
+			<hr>
+		</div>
+		
+		<div class="popup" data-ng-class="{'active': addNew}">
+			<div class="popup-content">
+				<form data-ng-submit="addCustomer(customer)" class="mt2 mb2">
+					<h4 class="mb2">New customer</h4>
+					<div class="form-group">
+						<input type="text" id="customer-name" data-ng-model="customer.name"/>
+						<label for="customer-name">Name</label>
+					</div>				  
 
-  		</div>
-  	</div>	    	
-  </div>
+					<div class="form-group">
+						<input type="text" id="customer-phone" data-ng-model="customer.phone"/>
+						<label for="customer-phone">Phone</label>
+					</div>
+
+					<div class="form-group">
+						<input type="text" id="customer-address" data-ng-model="customer.address"/>
+						<label for="customer-address">Address</label>
+					</div>				  
+
+					<div class="button-wrap center">
+						<button type="submit" class="btn" data-ng-click="addNew=!addNew">Save customer</button>				
+					</div>
+				</form>
+				<button data-ng-click="addNew=!addNew" class="fade-out">
+					<i class="fa fa-times"></i>
+				</button>					
+			</div>
+		</div>
+
+	</div>
 </div>
