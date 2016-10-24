@@ -23,8 +23,32 @@ angular.module('MyApp')
         vm.Invoice = function(name,discount,total){
             this.name = name;
             this.discount = discount;
+            this.count = 1;
             this.total = total;
             this.productsList = [];
+        };
+
+        vm.Product = function(name,price,count){
+            this.name = name;
+            this.count = count;
+            this.price = price;
+        };
+
+        vm.invoice = {
+            "name": "name",
+            "discount": "discount",
+            "total": "",
+            "productsList": [{"name":'',"count":1,"price": 0}]
+        };
+
+        vm.addProduct = function(product){
+            var newProduct = new vm.Product(product.name,product.price,1);
+            vm.invoice.productsList.push(newProduct);
+        };
+        vm.totalSum = function(ind, count){
+            var price = vm.invoice.productsList[ind].price;
+            console.log(vm.invoice.productsList[ind].price);
+            price = price * count;
         };
 
 

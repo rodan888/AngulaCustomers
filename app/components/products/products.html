@@ -1,31 +1,47 @@
 <div class="row ">
 	<div class="col-md-12">        
-		<h1 class="mt2 mb2">Products - {{productsList.length}}</h1>	
+		<h1 class="mt2 mb2">Products - {{product.productsList.length}}</h1>	
 
-				<div data-ng-repeat="product in productsList" class="col-md-12 product">
+				<div data-ng-repeat="item in product.productsList" class="col-md-12 product">
 					<div class="container-fluid">
 						<div class='row'>
 							<div class="col-md-3 clrp">
-								<h4 class="title">{{product.name}}</h4>
+								<h4 class="title">{{item.name}}</h4>
 							</div>
 							<div class="col-md-4 clrp">								
-								<span class="mt1">${{product.price}}</span>							
+								<span class="mt1">${{item.price}}</span>							
 							</div>
 							<div class="col-md-4 clrp">
-								<span><i class="fa fa-calendar-plus-o"></i> {{product.createdAt | dateFormat | date: "medium"}}</span>
-								<span><i class="fa fa-calendar-check-o"></i> {{product.updatedAt | dateFormat | date: "medium"}}</span>
+								<span><i class="fa fa-calendar-plus-o"></i> {{item.createdAt | dateFormat | date: "medium"}}</span>
+								<span><i class="fa fa-calendar-check-o"></i> {{item.updatedAt | dateFormat | date: "medium"}}</span>
 							</div>
 							<div class="col-md-1 clrp">								
 								<button data-ng-click="edit=!edit" class="btn">
 									<i class="fa fa-pencil"></i>
 								</button>	
-								<button data-ng-click="removeProduct($index)" class="btn">
+								<button data-ng-click="product.removeProduct($index)" class="btn">
 									<i class="fa fa-times"></i>
 								</button>		
 							</div>
-							<div class="col-md-12 edit-block" data-ng-show="edit">
-								<input type="text" data-ng-model="product.name" data-ng-blur="editCustomers($index,product);edit=!edit">
+
+							<div class="col-md-12 edit-block clrp" data-ng-show="edit">
+								<form class="full center">
+									<div class="form-group select">
+										<input type="text" 
+											data-ng-model="item.name" 
+											data-ng-blur="product.editProduct($index,item)">
+										<label for="customer-name">Name</label>
+									</div>
+									<div class="form-group select">
+										<input type="text" 
+											data-ng-model="item.price" 
+											data-ng-blur="product.editProduct($index,item)">
+										<label for="customer-name">Price</label>
+									</div>									
+									<button type="button" data-ng-click="edit=!edit" class="close"><i class="fa fa-times"></i></button>
+								</form>		
 							</div>
+
 						</div>
 					</div>	
 				</div>
@@ -38,15 +54,15 @@
 			
 				<div class="popup" data-ng-class="{'active': addNew}">
 					<div class="popup-content">
-						<form data-ng-submit="addProduct(product)" class="mt2 mb2">
+						<form data-ng-submit="product.addProduct(item)" class="mt2 mb2">
 							<h4 class="mb2">New product</h4>
 							<div class="form-group">
-								<input type="text" id="customer-name" data-ng-model="product.name"/>
+								<input type="text" id="customer-name" data-ng-model="item.name"/>
 								<label for="customer-name">Name</label>
 							</div>				  
 
 							<div class="form-group">
-								<input type="text" id="customer-price" data-ng-model="product.price"/>
+								<input type="text" id="customer-price" data-ng-model="item.price"/>
 								<label for="customer-price">Price</label>
 							</div>							
 

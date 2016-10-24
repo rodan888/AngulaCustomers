@@ -1,0 +1,64 @@
+<div class="row ">
+	<div class="col-md-12">        		
+		<h1 class="mt2 mb2">New invoices</h1>	        	
+
+		<form data-ng-submit="addInvoice(item)" class="full center mt2 mb2">
+
+			<div class="form-group select">				
+				<select 
+					data-ng-model="customer" 					
+					data-ng-options="customer.name for customer in invoices.customerList">
+					 <option value="" selected disabled>Select customer</option>
+				</select>
+				<label for="customer-name"><i class="fa fa-angle-up"></i></label>
+			</div>	
+
+			<div class="form-group select">				
+				<select data-ng-model="product"
+								data-ng-change="invoices.addProduct(product)"
+								data-ng-options="product.name for product in invoices.productsList">
+					 <option value="" selected disabled>Add product</option>
+				</select>
+				<label for="customer-name"><i class="fa fa-angle-up"></i></label>
+			</div>			
+		</form>
+
+	 
+		<div class="col-md-12 invoice">
+			<div class="container-fluid">
+				<div class='row'>
+					<div class="col-md-3 clrp">
+						<h4 class="title">{{customer.name}}</h4>
+					</div>
+					<div class="col-md-8 clrp">
+						<div class="container-fluid" data-ng-repeat="product in invoices.invoice.productsList track by $index">
+							<div class="row">
+								<div class="col-md-4">
+									<h4 class="title">{{product.name}}</h4>	
+								</div>
+								<div class="col-md-4">
+									<h4 class="title">${{product.price * product.count}}</h4>			
+								</div>
+								<div class="col-md-4">
+									<input type="number" 
+												class="mt1" 
+												data-ng-change="invoices.totalSum($index,product.count)"
+												data-ng-init="product.count=1" 
+												data-ng-model="product.count" 
+												value="1" 
+												min="1"> 	
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-1">
+						<input type="number" data-ng-init="invoices.discont=1" data-ng-model="invoices.discont" min=1>%
+					</div>
+				</div>
+			</div>	
+		</div>
+
+		<h2>Total summ - {{invoices.invoice.productsList | totalSum:invoices.discont}}</h2>
+{{invoices.invoice.productsList}}
+	</div>
+</div>
