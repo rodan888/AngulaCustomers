@@ -1,15 +1,8 @@
 angular.module('MyApp')
-    .controller('invoicesCtrl', ['invoicesApi', 'productsApi', 'customerService', 'dataService', invoicesCtrl]);
+    .controller('invoicesCtrl', ['invoicesApi', 'customersApi', 'productsApi', 'customerService', 'dataService', invoicesCtrl]);
 
-    function invoicesCtrl(invoicesApi, productsApi, customerService, dataService){
+    function invoicesCtrl(invoicesApi, customersApi, productsApi, customerService, dataService){
         var vm = this;
-        
-        vm.invoicesList = [];
-
-
-        customerService.async().then(function() {
-            vm.customerList = customerService.getCustomers();            
-        });
 
         dataService.getData(productsApi)
             .then(function (response) {
@@ -18,14 +11,29 @@ angular.module('MyApp')
                 console.log(error)
         });
 
+        dataService.getData(customersApi)
+            .then(function (response) {
+                vm.customerList = response.data;
+            }, function (error) {
+                console.log(error)
+        });
 
 
-        vm.Invoice = function(name,discount,total){
-            this.name = name;
-            this.discount = discount;
-            this.count = 1;
-            this.total = total;
-            this.productsList = [];
+        // customerService.async().then(function() {
+        //     vm.customerList = customerService.getCustomers();            
+        // });
+
+        // vm.Invoice = function(name,discount,total){
+        //     this.name = name;
+        //     this.discount = discount;            
+        //     this.total = total;
+        //     this.productsList = [];
+        // };
+        vm.invoice = {
+            "name": "name",
+            "discount": 0,
+            "total": "",
+            "productsList": []
         };
 
         vm.Product = function(name,price,count){
@@ -34,38 +42,38 @@ angular.module('MyApp')
             this.price = price;
         };
 
-        vm.invoice = {
-            "name": "name",
-            "discount": "discount",
-            "total": "",
-            "productsList": [{"name":'',"count":1,"price": 0}]
-        };
-
         vm.addProduct = function(product){
             var newProduct = new vm.Product(product.name,product.price,1);
             vm.invoice.productsList.push(newProduct);
+        };        
+
+        vm.totalSum = function(discont){
+          var result = 0,              
+              productL = vm.invoice.productsList.length;
+
+          for(var i = 0; i<productL; i++){
+            var count = vm.invoice.productsList[i].count,
+                price = vm.invoice.productsList[i].price;
+
+            result += count*price;
+          };
+
+          vm.invoice.discount = discont;        
+          vm.invoice.total = (result * discont / 100);
+
+          return result - (result * discont / 100).toFixed(2);
         };
-        vm.totalSum = function(ind, count){
-            var price = vm.invoice.productsList[ind].price;
-            console.log(vm.invoice.productsList[ind].price);
-            price = price * count;
-        };
 
 
+        // vm.addInvoice = function(customer){
+        //     vm.invoice = new vm.Invoice(customer.name,0,vm.totalSum());
 
-        vm.addInvoice = function(name){
-            var newInvoice = new vm.Invoice(name);
-            // ,invoice.discont,invoice.total
-
-            console.log(newInvoice);
-            vm.invoicesList.push(newInvoice);                
+        //     console.log(vm.invoice);
 
             // $http.post(invoicesApi, newInvoice).success(function(data){                
             //     vm.invoicesList.push(data);                
             // }).error(function(err){
             //     console.log(err);               
             // });
-        };
-        
-        
+        // };                
     };

@@ -2,19 +2,21 @@
 	<div class="col-md-12">        		
 		<h1 class="mt2 mb2">New invoices</h1>	        	
 
-		<form data-ng-submit="addInvoice(item)" class="full center mt2 mb2">
+		<form class="full center mt2 mb2">
 
 			<div class="form-group select">				
 				<select 
-					data-ng-model="customer" 					
+					data-ng-model="customer" 		
+					data-ng-change="invoices.invoice.name=customer.name"			
 					data-ng-options="customer.name for customer in invoices.customerList">
 					 <option value="" selected disabled>Select customer</option>
 				</select>
+					<!-- data-ng-change="invoices.addInvoice(customer)"			 -->
 				<label for="customer-name"><i class="fa fa-angle-up"></i></label>
 			</div>	
 
 			<div class="form-group select">				
-				<select data-ng-model="product"
+				<select data-ng-model="product"								
 								data-ng-change="invoices.addProduct(product)"
 								data-ng-options="product.name for product in invoices.productsList">
 					 <option value="" selected disabled>Add product</option>
@@ -42,23 +44,25 @@
 								<div class="col-md-4">
 									<input type="number" 
 												class="mt1" 
-												data-ng-change="invoices.totalSum($index,product.count)"
 												data-ng-init="product.count=1" 
 												data-ng-model="product.count" 
 												value="1" 
 												min="1"> 	
+												<!-- data-ng-change="invoices.totalSum($index,product.count)" -->
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-1">
-						<input type="number" data-ng-init="invoices.discont=1" data-ng-model="invoices.discont" min=1>%
+						<input type="number" 
+							data-ng-init="invoices.discont=0" 
+							data-ng-model="invoices.discont" 							
+							min=0 max=100>%
 					</div>
 				</div>
 			</div>	
 		</div>
-
-		<h2>Total summ - {{invoices.invoice.productsList | totalSum:invoices.discont}}</h2>
-{{invoices.invoice.productsList}}
+		{{invoices.invoice}}
 	</div>
+	<h1 class="title mt2 mb2">Total summ - <span data-ng-bind="'$'+invoices.totalSum(invoices.discont)"></span></h1>
 </div>
